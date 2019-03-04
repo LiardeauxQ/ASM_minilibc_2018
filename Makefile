@@ -5,12 +5,12 @@
 ## Makefile
 ##
 
-SRCS	=	memcpy.s	\
-			memset.s	\
-			strchr.s	\
-			strlen.s
+SRCS	=	strlen.asm	\
+			strchr.asm	\
+			memset.asm	\
+			memcpy.asm
 
-OBJ	=	$(SRCS:.s=.o)
+OBJ	=	$(SRCS:.asm=.o)
 
 LIB_NAME	=	libasm.so
 
@@ -23,11 +23,11 @@ BG_COLOR	=	\033[46m
 all:    $(LIB_NAME)
 
 $(LIB_NAME): $(OBJ)
-	@gcc -shared $(OBJ) -o $(LIB_NAME)
+	@ld -shared $(OBJ) -o $(LIB_NAME)
 
-%.o:	%.c
+%.o:	%.asm
 	@printf '${GREEN} [ OK ]${NC} Building : $<\n'
-	@gcc -o $@ -fPIC -c $< $(LDFLAGS) $(CFLAGS)
+	@nasm -o $@ -f elf64 $< $(LDFLAGS) $(CFLAGS)
 
 clean:
 	@rm -f $(OBJ)
@@ -35,7 +35,6 @@ clean:
 
 fclean: clean
 	@rm -f $(LIB_NAME)
-	@find . -name *.dSYM -type d -exec rm -rf "{}" \;
 	@printf '${RED}Fclean${NC}: ./$(NAME) $(LIB_NAME) removed\n'
 
 re: fclean all
