@@ -2,9 +2,9 @@ BITS 64
 
 SECTION .text
 
-GLOBAL strpbrk ; char *strpbrk(const char *s, const char *accept)
+GLOBAL strcspn ; size_t strcspn(const char *s, const char *reject)
 
-strpbrk:
+strcspn:
     PUSH RBP
     PUSH RCX
     PUSH R10
@@ -14,10 +14,11 @@ strpbrk:
     MOV RBP, RSP
     MOV R9, RSI
     XOR RCX, RCX
+    XOR RAX, RAX
 
 loop:
     CMP BYTE [RDI + RCX], 0
-    JE not_find
+    JE end
     XOR R8, R8
     XOR R10, R10
     MOV R10, [RDI + RCX]
@@ -27,13 +28,9 @@ next_loop:
     INC RCX
     JMP loop
 
-not_find:
-    MOV RAX, 0
-    JMP end
-
-find:
-    MOV RAX, RDI
-    ADD RAX, RCX
+increment:
+    INC RAX
+    JMP next_loop
 
 end:
     MOV RSP, RBP
@@ -44,10 +41,11 @@ end:
     POP RBP
     RET
 
-strchr:
+strchr: 
     CMP BYTE [R9 + R8], R10B
-    JE find
+    JE end
     CMP BYTE [R9 + R8], 0
-    JE next_loop
+    JE increment
     INC R8
     JMP strchr
+
