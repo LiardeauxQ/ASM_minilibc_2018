@@ -13,7 +13,8 @@ SRCS	=	strlen.asm	\
 			strncmp.asm	\
 			rindex.asm	\
 			strstr.asm	\
-			strcasecmp.asm
+			strcasecmp.asm	\
+			strpbrk.asm
 
 OBJ	=	$(SRCS:.asm=.o)
 

@@ -6,6 +6,7 @@ GLOBAL strchr ; char *strchr(const char *s, int c)
 
 strchr:
     PUSH RBP
+    PUSH RCX
     MOV RBP, RSP
     XOR RCX, RCX
 
@@ -18,7 +19,7 @@ loop:
     JMP loop
 
 no_matching:
-    XOR RAX, RAX
+    MOV RAX, 0
     JMP end
 
 matching:
@@ -28,5 +29,6 @@ matching:
     
 end:
     MOV RSP, RBP
+    POP RCX
     POP RBP
     RET
