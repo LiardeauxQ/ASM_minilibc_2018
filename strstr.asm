@@ -11,7 +11,6 @@ strstr:
     PUSH RBX
     PUSH RDX
     PUSH R8
-    PUSH R9
     MOV RBP, RSP
     MOV RBX, RDI
     XOR R8, R8
@@ -40,7 +39,6 @@ find:
 
 end:
     MOV RSP, RBP
-    POP R9
     POP R8
     POP RDX
     POP RBX

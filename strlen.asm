@@ -6,6 +6,7 @@ GLOBAL strlen ; size_t strlen(const char *s)
 
 strlen:
     PUSH RBP
+    PUSH RCX
     MOV RBP, RSP
     XOR RCX, RCX
 
@@ -18,6 +19,7 @@ loop:
 end:
     MOV RAX, RCX
     MOV RSP, RBP
+    POP RCX
     POP RBP
     RET
 
