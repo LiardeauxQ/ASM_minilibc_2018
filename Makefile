@@ -15,7 +15,8 @@ SRCS	=	strlen.asm	\
 			strstr.asm	\
 			strcasecmp.asm	\
 			strpbrk.asm	\
-			strcspn.asm
+			strcspn.asm	\
+			memmove.asm
 
 OBJ	=	$(SRCS:.asm=.o)
 
