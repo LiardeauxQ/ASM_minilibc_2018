@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-SRCS	=	strlen.asm	\
+PATHSRC =	src/
+
+SRC	=	strlen.asm	\
 			strchr.asm	\
 			memset.asm	\
 			memcpy.asm	\
@@ -18,7 +20,9 @@ SRCS	=	strlen.asm	\
 			strcspn.asm	\
 			memmove.asm
 
-OBJ	=	$(SRCS:.asm=.o)
+
+SRCDIR	=	$(addprefix $(PATHSRC), $(SRC))
+OBJ		=	$(SRCDIR:.asm=.o)
 
 LIB_NAME	=	libasm.so
 
